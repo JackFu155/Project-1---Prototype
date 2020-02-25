@@ -5,6 +5,11 @@ html, body {
   padding: 0;
 }
 
+body{
+  /*background-image: url("/../corgi_fur.jpg");*/
+  background-color: #FFC26F;
+}
+
 #top {
   text-align: center;
   margin: 0 auto;

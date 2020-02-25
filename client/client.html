@@ -4,8 +4,7 @@
   <title>Our simple HTTP server</title>
   <link rel="stylesheet" type="text/css" href="/style.css">
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
-  <script type="text/babel">
+  <script>
     //function to parse our response
     const parseJSON = (xhr, content) => {
       //parse response (obj will be empty in a 204 updated)
@@ -40,7 +39,7 @@
       const xhr = new XMLHttpRequest();
       xhr.open("GET", "http://127.0.0.1:3000/getUsers");
       xhr.onload = (e) =>{
-        let output = "<h2>All Users</h2>";
+        let output = "<h2>All Posts</h2>";
         let response = e.target.response;
         // output += response;
         const users = JSON.parse(response).users;
@@ -49,7 +48,7 @@
           let user = users[k];
           let name = user.name;
           let age = user.age;
-          output += `<p>${name} = ${age}</p>`;
+          output += `<p>${name} : ${age}</p>`;
         }
         allUsers.innerHTML = output;
       };
@@ -154,15 +153,26 @@
 </head>
 <body>
   <section id="top">
-    <h3>POST Status Code Tests</h3>
+    <h1>Corgi Caller</h1>
+    <img src="images/Corgi.jpg">
+    <h4>Your all in one place for posting cute doggy things</h4>
     <form id="nameForm" action="/addUser" method="post">
-      <label for="name">Name: </label>
-      <input id="nameField" type="text" name="name" />
-      <label for="age">Age: </label>
-      <input id="ageField" type="number" name="age" min="0" max="100" step="1"/>
-      <input type="submit" value="Add User" />
+      <!--Title-->
+      <label for="name">Title: </label>
+      <input id="nameField" type="text" name="name" /><br>
+      <!--Description-->
+      <label for="age">Description: </label>
+      <input id="ageField" type="text" name="description"/><br>
+      <!--Date Taken (Not in Service)-->
+      <label for="date">Date: </label>
+      <input id="dateField" type="number" name="date" disabled/><br>
+      <!--Image Link (Not in Service)-->
+      <label for="image">Image: </label>
+      <input id="imageField" type="text" name="image" disabled/><br>
+      <input type="submit" value="Post" />
     </form>
-    <p>Go to /getUsers to see users.</p>
+    <p>Go to /getUsers to see results.</p>
+    <p>Image and Date boxes field not programmed yet</p>
   </section>
   <section id="allUsers">
 
