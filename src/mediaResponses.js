@@ -1,9 +1,9 @@
 //Taken from MediaResponses Homework
 const fs = require('fs');
-const path = require('path');
+const Path = require('path');
 
 const loadFile = (request, response, link, type) =>{
-    const file = path.resolve(__dirname, link);
+    const file = Path.resolve(__dirname, link);
 
   fs.stat(file, (err, stats) => {
     if (err) {

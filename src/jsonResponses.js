@@ -25,7 +25,7 @@ const respondJSONMeta = (request, response, status) => {
 //return user object as JSON
 const getUsers = (request, response) => {
   const responseJSON = {
-    users,
+    quokesArray,
   };
 
   respondJSON(request, response, 200, responseJSON);
