@@ -1,13 +1,19 @@
+//Taken from Week 5B and 6A Demos
 const http = require('http'); //pull in http module
 //url module for parsing url string
 const url = require('url'); 
 //querystring module for parsing querystrings from url
 const query = require('querystring');
+//fs used for reading JSON file
+const fs = require('fs');
 //pull in our custom files
 const htmlHandler = require('./htmlResponses.js');
+const mediaHandler = require('./mediaResponses.js');
 const jsonHandler = require('./jsonResponses.js');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
+
+let quokesArray;
 
 //handle POST requests
 const handlePost = (request, response, parsedUrl) => {
@@ -49,14 +55,48 @@ const handlePost = (request, response, parsedUrl) => {
   }
 };
 
+const handlerGetAllQuokes = (request, response) =>{
+	const statusCode = 200;
+	response.writeHead(statusCode, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : '*'});
+	response.write(JSON.stringify(quokesArray));
+	response.end();
+};
+
+const handlerGetRandomQuoke = (request, response) =>{
+	const statusCode = 200;
+	response.writeHead(statusCode, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : '*'});
+	let quoke = quokesArray[Math.floor(Math.random() * quokesArray.length)];
+	response.write(JSON.stringify(quoke));
+	response.end();
+};
+
 //handle GET requests
 const handleGet = (request, response, parsedUrl) => {
   //route to correct method based on url
   if (parsedUrl.pathname === '/style.css') {
     htmlHandler.getCSS(request, response);
-  } else if (parsedUrl.pathname === '/getUsers') {
-    jsonHandler.getUsers(request, response);
-  } else {
+  } 
+  else if (parsedUrl.pathname === '/Corgi.jpg') {
+    htmlHandler.getCorgi(request, response);
+  } 
+  else if (parsedUrl.pathname === '/getAllQuokes') {
+    handlerGetAllQuokes(request, response);
+  }
+  else if (parsedUrl.pathname === '/getRandomQuoke') {
+    handlerGetRandomQuoke(request, response);
+  }
+  else if (parsedUrl.pathname === '/roll.mp4') {
+    mediaHandler.getVideo(request, response, '../client/roll.mp4', 'video/mp4');
+  }
+  /*else if (parsedUrl.pathname === '/right_bubble.png') {
+    htmlHandler.getRight(request, response);
+  }
+  else if (parsedUrl.pathname === '/left_bubble.png') {
+    htmlHandler.getLeft(request, response);
+  }*/
+  else if (parsedUrl.pathname === '/corgi_fur.jpg') {
+    htmlHandler.getFur(request, response);
+  }else {
     htmlHandler.getIndex(request, response);
   }
 };
@@ -74,6 +114,11 @@ const onRequest = (request, response) => {
     handleGet(request, response, parsedUrl);
   }
 };
+
+// load quokes
+const quokesFile = fs.readFileSync(`${__dirname}/../client/quokes.json`);
+quokesArray = JSON.parse(quokesFile).quokes;
+console.log(`There are ${quokesArray.length} quokes`);
 
 http.createServer(onRequest).listen(port);
 

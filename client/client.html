@@ -4,7 +4,9 @@
   <title>Our simple HTTP server</title>
   <link rel="stylesheet" type="text/css" href="/style.css">
   
+  <!--Taken from Week 5B and 6A Demos-->
   <script>
+
     //function to parse our response
     const parseJSON = (xhr, content) => {
       //parse response (obj will be empty in a 204 updated)
@@ -34,23 +36,25 @@
     //   allUsers.innerHTML = output;
     // }
 
-    const getAllUsers = () =>{
-      console.log("getAllUsers");
+    const getAllQuokes = () =>{
+      console.log("getAllQuokes");
       const xhr = new XMLHttpRequest();
-      xhr.open("GET", "http://127.0.0.1:3000/getUsers");
+      // load quokes
+      xhr.open("GET", "./getAllQuokes");
       xhr.onload = (e) =>{
-        let output = "<h2>All Posts</h2>";
+        let output = "<h2>All Quokes</h2>";
         let response = e.target.response;
         // output += response;
-        const users = JSON.parse(response).users;
-        let keys = Object.keys(users);
+        const quokes = JSON.parse(response).quokes;
+        console.log(quokes);
+        let keys = Object.keys(quokes);
         for(let k of keys){
-          let user = users[k];
-          let name = user.name;
-          let age = user.age;
-          output += `<p>${name} : ${age}</p>`;
+          let quoke = quokes[k];
+          let q = quoke.q;
+          let a = quoke.a;
+          output += `<p>${q} : ${a}</p>`;
         }
-        allUsers.innerHTML = output;
+        allQuokes.innerHTML = output;
       };
       xhr.send();
 
@@ -58,7 +62,7 @@
 
     //function to handle our response
     const handleResponse = (xhr) => {
-      getAllUsers();
+      getAllQuokes();
       const content = document.querySelector('#content');
       
       //check the status code
@@ -85,6 +89,12 @@
 
       
     };
+
+    //function to corgi-roll - bonus
+    const corgiRoll = () =>{
+      window.open("./roll.mp4", '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');
+      console.log("clicked");
+    }
 
     //function to send our post request
     const sendPost = (e, nameForm) => {
@@ -134,6 +144,8 @@
     };
 
     const init = () => {
+      
+      console.log("Hi")
       //grab form
       const nameForm = document.querySelector('#nameForm');
       
@@ -144,7 +156,7 @@
       nameForm.addEventListener('submit', addUser);
 
       //showUsers();
-      getAllUsers();
+      getAllQuokes();
     };
 
     window.onload = init;
@@ -153,28 +165,33 @@
 </head>
 <body>
   <section id="top">
-    <h1>Corgi Caller</h1>
-    <img src="images/Corgi.jpg">
-    <h4>Your all in one place for posting cute doggy things</h4>
+    <h1 id="t">Corgi Quokes</h1>
+    <img src="./Corgi.jpg">
+    <h4 id="r">Please help give me a voice</h4>
+    <h4 id="l">I am Tori the Corgi</h4>
+    <h4>Your all in one place for the voice of the Corgis, Quotes + Jokes = Quokes</h4>
+    <h4>Type either a Corgi Name or Question of Joke in the Title Box</h4>
+    <h4>Then Type either a Corgi Quote or Punchline of Joke in the Description Box</h4>
+    <h4>Essentially, what do you imagine a Corgi would say?</h4>
+    
     <form id="nameForm" action="/addUser" method="post">
       <!--Title-->
       <label for="name">Title: </label>
-      <input id="nameField" type="text" name="name" /><br>
+      <input id="nameField" type="text" name="name" />
       <!--Description-->
       <label for="age">Description: </label>
-      <input id="ageField" type="text" name="description"/><br>
-      <!--Date Taken (Not in Service)-->
-      <label for="date">Date: </label>
-      <input id="dateField" type="number" name="date" disabled/><br>
-      <!--Image Link (Not in Service)-->
-      <label for="image">Image: </label>
-      <input id="imageField" type="text" name="image" disabled/><br>
-      <input type="submit" value="Post" />
+      <input id="ageField" type="text" name="description"/>
+      <input type="submit" class="button" value="Add Quoke" />
     </form>
-    <p>Go to /getUsers to see results.</p>
-    <p>Image and Date boxes field not programmed yet</p>
+    <p>Go to /getAllQuokes to see all of the curently posted quokes</p>
+
+    <h2>Random Quoke</h2>
+
+    <h2>All Quokes</h2>
+
+    <button class="button" onclick="corgiRoll()">Click Me</button>
   </section>
-  <section id="allUsers">
+  <section id="allQuokes">
 
   </section>
   <section id="content">

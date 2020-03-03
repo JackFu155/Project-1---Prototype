@@ -6,8 +6,24 @@ html, body {
 }
 
 body{
-  /*background-image: url("/../corgi_fur.jpg");*/
-  background-color: #FFC26F;
+  background-image: url("./corgi_fur.jpg");
+  background-color: #E17400;
+  font-family: cursive;
+}
+
+#ima{
+  background-image: url("./Corgi.jpg");
+}
+
+.button {
+  background-color: #FFAF5B; /* Tan */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
 
 #top {
@@ -17,6 +33,35 @@ body{
 
 #top h1 {
   font-size: 2em;
+}
+
+#t{
+  font-family: cursive;
+}
+
+#r{
+  
+  font-family: cursive;
+  text-align: right; 
+    transform: rotate(30deg);
+    margin-top: 0px;
+    transform: translateY(-150px);
+    
+}
+
+#l{
+  font-family: cursive;
+  text-align: left;
+    transform: rotate(-30deg);
+    margin-top: 0px;
+    transform: translateY(-150px);
+}
+
+#top{
+  border-radius: 25px;
+  border: 2px solid #000000;
+  width: 80%;
+  background-color: #FFFFFF;
 }
 
 #content {
