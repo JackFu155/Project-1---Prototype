@@ -85,10 +85,10 @@ const handleGet = (request, response, parsedUrl) => {
   else if (parsedUrl.pathname === '/roll.mp4') {
     mediaHandler.getVideo(request, response, '../client/roll.mp4', 'video/mp4');
   }
-  else if (parsedUrl.pathname === '/getRandomQuoke') {
+  /*else if (parsedUrl.pathname === '/getRandomQuoke') {
     handlerGetRandomQuoke(request, response);
   }
-  /*else if (parsedUrl.pathname === '/right_bubble.png') {
+  else if (parsedUrl.pathname === '/right_bubble.png') {
     htmlHandler.getRight(request, response);
   }
   else if (parsedUrl.pathname === '/left_bubble.png') {
