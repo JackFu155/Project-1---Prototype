@@ -55,7 +55,7 @@ const handlePost = (request, response, parsedUrl) => {
   }
 };
 
-/*const handlerGetAllQuokes = (request, response) =>{
+const handlerGetAllQuokes = (request, response) =>{
 	const statusCode = 200;
 	response.writeHead(statusCode, {'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : '*'});
 	response.write(JSON.stringify(quokesArray));
@@ -68,7 +68,7 @@ const handlerGetRandomQuoke = (request, response) =>{
 	let quoke = quokesArray[Math.floor(Math.random() * quokesArray.length)];
 	response.write(JSON.stringify(quoke));
 	response.end();
-};*/
+};
 
 //handle GET requests
 const handleGet = (request, response, parsedUrl) => {
@@ -79,16 +79,16 @@ const handleGet = (request, response, parsedUrl) => {
   else if (parsedUrl.pathname === '/Corgi.jpg') {
     htmlHandler.getCorgi(request, response);
   } 
-  /*else if (parsedUrl.pathname === '/getAllQuokes') {
+  else if (parsedUrl.pathname === '/getAllQuokes') {
     handlerGetAllQuokes(request, response);
-  }*/
+  }
   else if (parsedUrl.pathname === '/roll.mp4') {
     mediaHandler.getVideo(request, response, '../client/roll.mp4', 'video/mp4');
   }
-  /*else if (parsedUrl.pathname === '/getRandomQuoke') {
+  else if (parsedUrl.pathname === '/getRandomQuoke') {
     handlerGetRandomQuoke(request, response);
   }
-  else if (parsedUrl.pathname === '/right_bubble.png') {
+  /*else if (parsedUrl.pathname === '/right_bubble.png') {
     htmlHandler.getRight(request, response);
   }
   else if (parsedUrl.pathname === '/left_bubble.png') {
